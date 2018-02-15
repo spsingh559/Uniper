@@ -1,0 +1,169 @@
+<div ng-controller="uniperController">
+      <div class="container-fluid">
+
+<form name="myForm">
+         <table class="table table-striped table-hover" style="width:70%;">
+                     <thead>
+
+                      <tr>
+                        <th>Demand Request ID:</th>
+                        <td>{{demandreq.drid}}</td>
+                      </tr>
+
+                      <tr>
+                        <th>Product ID:</th>
+                        <td>
+
+                            <div class="col-sm-7 pull-left" >
+                                <input id="offer" type="text" ng-model="demandreq.prid" required=""  class="form-control" style="margin-right: 17px;" required = "">
+              <!-- <a  >Existing Product</a> -->
+
+                            </div>
+                              <div ><a href=""  data-toggle="modal" data-target = "#existingModal" ng-click="GetAllProduct()">Existing Products</a></div>
+              </td>
+                      </tr>
+                       <tr>
+                        <th>Current Status:</th>
+                        <td>{{demandreq.status}}</td>
+                      </tr>
+                      <tr>
+                        <th>Offer Count:</th>
+                        <td>{{demandreq.counter_offer_count}}</td>
+                      </tr>
+                          <tr>
+                        <th>Cost Updated By:</th>
+                        <td>{{demandreq.updated_by}}</td>
+                      </tr>
+                        <tr>
+                        <th style="vertical-align: top;">Last Updated Time</th>
+                        <td>{{demandreq.last_update_timestamp}}</td>
+                      </tr>
+                     </thead>
+                  </table>
+
+      <div class="panel-group">
+      <div class="panel panel-primary">
+         <div class="panel-heading">
+       <!--  <div class="col-sm-4">Attribute</div>
+        <div class="col-sm-4"> Previous Offer</div>
+        <div class="col-sm-4">Counter Offer</div> -->
+        <div class="row">
+                <div class="col-md-3" style="width:27%;">Attribute</div>
+                <div class="col-md-3" style="width:27%;">
+                    Previous Offer
+                </div>
+                <div class="col-md-3" style="width:27%;">
+                    Counter Offer
+                </div>
+            </div>
+         </div>
+         <div class="panel-body">
+           <table class="table table-striped table-hover" style="width:100%;">
+                     <thead>
+
+                      <tr>
+                        <th>Price:</th>
+                        <td>{{demandreqStatic.price}} &euro;</td>
+                        <td><input type="text" name=""  class="form-control" ng-model="demandreq.price" required=""></td>
+                      </tr>
+
+                      <tr>
+                        <th>Delivery Location:</th>
+                        <td>{{demandreqStatic.delivery_location_country}},{{demandreqStatic.delivery_location_city}}</td>
+                         <td>
+    <select class="form-control col-sm-4" id="sel1" class="form-control"  required="" ng-model = "selectLocation" required = "">
+                            <option>Select</option>
+                                <option>Rotterdam, Netherlands</option>
+                                <option>Amsterdam, Netherlands</option>
+                                <option>Berlin, Germany</option>
+                                <option>Bonn, Germany</option>
+                                <option>Frankfurt, Germany</option>
+                                <option>Munich, Germany</option>
+                                <option>Stuttgart, Germany</option>
+                                <option>Copenhagen, Denmark</option>
+                                <option>Horsens, Denmark</option>
+                                <option>Kolding, Denmark</option>
+                                <option>London, United Kingdom</option>
+                                <option>Gothenburg, Sweden</option>
+                                <option>Oslo, Norway</option>
+                                <option>Vienna, Austria</option>
+                                <option>Brussels, Belgium</option>
+                                <option>Bulgaria, Sofia</option>
+                                <option>Nicosia,Cyprus</option>
+                        </select>
+                      </td>
+                      </tr>
+                       <tr>
+                        <th>Volume:</th>
+                        <td>{{demandreqStatic.volume}} m&sup3;</td>
+                         <td><input type="text" name=""  class="form-control"  ng-model ="demandreq.volume" required=""></td>
+                      </tr>
+                      <tr>
+                        <th>Delivery Date:</th>
+                        <td>{{demandreqStatic.delivery_date}}</td>
+                         <td><input type="date" name=""  class="form-control" ng-model = "demandreq.delivery_date" required=""></td>
+                      </tr>
+
+                     </thead>
+                  </table>
+                  <button type = "button" class="btn btn-info" ng-click="submitCounterOffer();" >Submit Counter Offer</button>
+                  <button type = "button" class="btn btn-info" ng-click="cancelCounterOffer();">Cancel</button>
+         </div>
+      </div>
+      </div>
+
+
+      <div class="modal fade" id="existingModal" role="dialog" tabindex="-1" 
+      aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static"  style="margin-top:50px">
+        <div class="modal-dialog  modal-lg" >
+
+<div class="modal-content">
+  <div class="modal-header" style="background-color:darkcyan">
+    <button type="button" class="close" data-dismiss="modal" ng-click="cancel()">&times;</button>
+    <h4 class="modal-title pull-left">Existing Products Detail</h4>
+    <button type ="button" class="btn btn-success btn-md " data-dismiss="modal" ng-click="newProductPage()"
+    style="margin-left:200px" >Create New Product</button>
+  </div>
+  <div class="modal-body" style="background-color:azure;">
+
+    <table class="table  table-striped table-responsive" style="background-color:aliceblue;">
+       <thead style="background-color:antiquewhite; font-color:black">
+          <tr>
+             <th>Select</th>
+             <th>Product ID</th>
+             <th>Supplier Name</th>
+             <th>Transporter</th>
+             <th>Volume</th>
+             <th>Delivery Location</th>
+             <th>Delivery Date</th>
+
+          </tr>
+       </thead>
+       <tbody>
+          <tr ng-repeat="x in ProductDetails track by $index">
+           <!--  <td><input type="radio" ng-click="selectProductRow(x)" name="yourPORadio" ng-hide="{{data.status == 'Consumed'}}"></td>
+-->
+<!-- <td><a href="" data-toggle="modal" data-target = "#productModal" ng-click = "selectProductRow1(x);">{{x.prid}}</a></td> -->
+<td><input type="radio" name = "yourPORadio" ng-model="x.selected" ng-value="x" ng-click = "selectProductFromCounter(x)"></td>
+               <td> {{x.prid}}</td>
+
+
+            <td>{{x.supplier_name}}</td>
+            <td>{{x.transporter_name}}</td>
+            <td>{{x.volume}} m&sup3;</td>
+            <td>{{x.source_location_country}},{{x.source_location_city}}</td>
+            <td>{{x.destination_date}}</td>
+          </tr>
+       </tbody>
+    </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-md" data-dismiss="modal" ng-click="selectExistingProduct()"  ng-disabled="!enableSelectButtonModalOnExistingProducts">Select</button>
+                          <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+</div>
+</div>

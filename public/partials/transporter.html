@@ -1,0 +1,340 @@
+<div ng-controller = "transporterController">
+	<div class="container-fluid">
+      <div class="panel-group">
+         <div class="panel panel-primary">
+         <div class="panel-heading" >Confirmed Trades</div>
+         <div class="panel-body">
+            <table class="table table-striped table-responsive" st-table="rowCollection" style="background-color:aliceblue;">
+               <thead style="background-color:antiquewhite;">
+                  <tr>
+
+                      <th>CTID</th>
+                      <th>Status</th>
+                     <th>Quantity</th>
+                      <th>Location</th>
+                    <!--  <th>Price</th> -->
+
+                     <th>Date</th>
+
+                  </tr>
+               </thead>
+               <tbody ng-show = "confirmTrades_data.length!=0">
+                  <tr ng-repeat="x in confirmTrades_data">
+
+                   <td><a href="" data-toggle="modal" data-target = "#confirmTradeInfo" ng-click="selectConfirmTrade(x)">{{x.ctid}}</a></td>
+                   <td>Confirmed Trade</td>
+                    <td>{{x.volume}} m&sup3;</td>
+                    <td>{{x.delivery_location_country}},{{x.delivery_location_city}}</td>
+                  <!--   <td>{{x.price}}</td> -->
+                    <td>{{x.delivery_date}}</td>
+                 </tr>
+               </tbody>
+            </table>
+						<center> <span ng-show = "confirmTrades_data.length==0"><b>No confirm trader available.</b></span><center>
+         </div>
+      </div>
+   </div>
+
+<div class="modal fade" id="confirmTradeInfo" role="dialog" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header" style="background-color:darkcyan;">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Confirmed Trade</h4>
+               </div>
+               <div class="modal-body" style="background-color:azure;">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th style="width: 45%;">CTID:</th>
+                                <td>{{confirmTrade.ctid}}</td>
+                            </tr>
+                            <tr>
+                                <th>Volume:</th>
+                                <td>{{confirmTrade.volume}} m&sup3;</td>
+                            </tr>
+                            <tr>
+                                <th>Delivery Location:</th>
+                                <td>{{confirmTrade.delivery_location_country}}</td>
+                            </tr>
+                            <tr>
+                                <th>Delivery Date:</th>
+                                <td>{{confirmTrade.delivery_date}}</td>
+                            </tr>
+                            <tr>
+                                <th>Supplier Name:</th>
+                                <td>{{confirmTrade.supplier_name}}</td>
+                            </tr>
+                              <tr>
+                                <th>Supplier Load Date:</th>
+                                <td>{{confirmTrade.supplier_load_date}}</td>
+                            </tr>
+                              <tr>
+                                <th>Source Location:</th>
+                                <td>{{confirmTrade.source_location_city}}</td>
+                            </tr>
+                              <tr>
+                                <th>Container Load Date:</th>
+                                <td>{{confirmTrade.container_load_date}}</td>
+                            </tr>
+                              <tr>
+                                <th>Load Port:</th>
+                                <td>{{confirmTrade.load_port}}</td>
+                            </tr>
+
+                              <tr>
+                                <th>Container Discharge Date:</th>
+                                <td>{{confirmTrade.container_discharge_date}}</td>
+                            </tr>
+                              <tr>
+                                <th>Uniper ID:</th>
+                                <td>trader1@uniper.com</td>
+                            </tr>
+                              <tr>
+                                <th>Customer ID:</th>
+                                <td>{{confirmTrade.customer_id}}</td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+               </div>
+            </div>
+         </div>
+      </div>
+			<div class="panel-group">
+    <div class="pull-right" >
+         <button type ="button" id = "updateProduct" ng-disabled = "disableTrackBtn" class="btn btn-success btn-md" data-toggle="modal"
+				 ng-click = "trackShipment();">Track
+				 <span class="glyphicon glyphicon-arrow-right"/>
+			 </button>
+      </div>
+         <div class="panel panel-primary">
+         <div class="panel-heading" >Shipments</div>
+         <div class="panel-body">
+            <table class="table table-striped table-responsive" st-table="rowCollection" style="background-color:aliceblue;">
+               <thead style="background-color:antiquewhite;">
+                  <tr>
+                      <th>Select</th>
+                      <th>Shipment ID</th>
+                      <th>Current Status</th>
+                     <th>CTID</th>
+                     <th>Last Updated By</th>
+                     <th>Last Updated Date</th>
+                  </tr>
+               </thead>
+               <tbody ng-show = "shipemnts_data.length!=0">
+                  <tr ng-repeat="x in shipemnts_data">
+                     <td><input type="radio" ng-click=" shipmentDataToTrackPage(x);selectBtnDisable('disableTrackBtn');" name="yourPORadio"></td>
+                    <td>{{x.shipment_id}}</td>
+                   <td>{{x.status}}</td>
+                    <td>{{x.ctid}}</td>
+                    <td>{{x.updated_by}}</td>
+                    <td>{{x.last_update_date}}</td>
+                 </tr>
+               </tbody>
+            </table>
+						<center> <span ng-show = "shipemnts_data.length==0"><b>No shipments available.</b></span><center>
+         </div>
+      </div>
+   </div>
+   <!-- <div class="panel-group">
+    <div class="pull-right" >
+         <button type ="button" id = "updateProduct" ng-disabled = "disableTrackBtn" class="btn btn-primary btn-md" data-toggle="modal" ng-click = "trackShipment();">Track</button>
+      </div>
+         <div class="panel panel-primary">
+         <div class="panel-heading" >Shipments</div>
+         <div class="panel-body">
+            <table class="table table-striped table-responsive" st-table="rowCollection" style="background-color:aliceblue;">
+               <thead style="background-color:antiquewhite;">
+                  <tr>
+                      <th>Select</th>
+                     <th>Shipment ID</th>
+                     <th>CTID</th>
+                     <th>Truck/Vessel</th>
+                     <th>Current Location</th>
+                     <th>Expected Delivery</th>
+                     <th>Expected Quantity</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr ng-repeat="x in shipemnts_data | orderBy: '-productBarCode'">
+                     <td><input type="radio" ng-click="selectBtnDisable('disableTrackBtn');" name="yourPORadio"></td>
+                    <td>{{x.shipment_id}}</td>
+                    <td>{{x.ctid}}</td>
+                    <td>{{x.truck_vessel}}</td>
+                    <td>{{x.current_location}}</td>
+                    <td>{{x.expected_delivery}}</td>
+                    <td>{{x.expected_quantity}}</td>
+                 </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div> -->
+<!-- <div class="modal fade" id="myShipments" role="dialog" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header" style="background-color:darkcyan;">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">My Shipments</h4>
+               </div>
+               <div class="modal-body" style="background-color:azure;">
+                    <form role="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="supplier" class="col-sm-3 control-label">Shipment ID:</label>
+                            <div class="col-sm-9">
+                                <input id="ShipmentID" type="text" ng-model="Bill.materialId" required="" disabled="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="supplier" class="col-sm-3 control-label">CTID:</label>
+                            <div class="col-sm-9">
+                                <input id="CTID" type="text" ng-model="Bill.name" required="" class="form-control" disabled="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="supplier" class="col-sm-3 control-label">Truck/Vessel</label>
+                            <div class="col-sm-9">
+                                <input id="Price" type="text" ng-model="Bill.quantity" required="" class="form-control" disabled=""></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="supplier" class="col-sm-3 control-label">Current Location:</label>
+                            <div class="col-sm-9">
+                                <input id="Location" type="text" ng-model="Bill.origin" required="" class="form-control" disabled="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="supplier" class="col-sm-3 control-label">Expected Delivery:</label>
+                            <div class="col-sm-9">
+                            <input id="Date" type="text" ng-model="Bill.shippedTo" required="" class="form-control" disabled="">
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label for="supplier" class="col-sm-3 control-label">Expected Quantity:</label>
+                            <div class="col-sm-9">
+                            <input id="Quantity" type="text" ng-model="Bill.shippedTo" required="" class="form-control" disabled="">
+                            </div>
+                        </div>
+                           </form>
+                </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Edit</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Update</button>
+               </div>
+            </div>
+         </div>
+      </div>   -->
+			<div class="panel-group">
+	        <div class="pull-right" >
+	          <button type ="button" id = "updateProduct" ng-disabled ="disableInvoiceBtn" class="btn btn-success btn-md" data-toggle="modal" ng-click = "payInvoiceFunc()">Settle Invoice
+							<span class="glyphicon glyphicon-euro" />
+						</button>
+	       </div>
+	          <div class="panel panel-primary">
+	          <div class="panel-heading" >Invoices</div>
+	          <div class="panel-body">
+	             <table class="table table-striped table-responsive" st-table="rowCollection" style="background-color:aliceblue;">
+	                <thead style="background-color:antiquewhite;">
+	                   <tr>
+	                       <th>Select</th>
+
+	                      <th>Invoice ID</th>
+	                      <th>Status</th>
+	                      <th>Invoice Date</th>
+	                      <th>Invoice Amount</th>
+	                      <th>VAT</th>
+	                      <th>Total Amount</th>
+	                   </tr>
+	                </thead>
+	                <tbody ng-show = "invoices_data.length!=0">
+	                   <tr ng-repeat="x in invoices_data">
+	                      <td><input type="radio" ng-click="InvoiceDataRow(x);selectBtnDisable('disableInvoiceBtn');" name="yourPORadio"></td>
+	                     <td><a href="" data-toggle="modal" data-target = "#myInvoice" ng-click = myinvoiceInfo(x)>{{x.invoice_id}}</a></td>
+	                      <td>{{x.status}}</td>
+	                     <td>{{x.invoice_date}}</td>
+	                     <td>{{x.invoice_amount}} &euro;</td>
+	                     <td>{{x.vat*100}}%</td>
+	                     <td>{{x.total_amount}} &euro;</td>
+	                  </tr>
+	                </tbody>
+	             </table>
+							 <center> <span ng-show = "invoices_data.length==0"><b>No Invoices available.</b></span><center>
+	          </div>
+	       </div>
+	    </div>
+	 <div class="modal fade" id="myInvoice" role="dialog" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+	          <div class="modal-dialog">
+	             <div class="modal-content">
+	                <div class="modal-header" style="background-color:darkcyan;">
+	                   <button type="button" class="close" data-dismiss="modal">&times;</button>
+	                     <h4 class="modal-title">My Invoice</h4>
+	                </div>
+	                <div class="modal-body" style="background-color:azure;">
+	                     <table class="table table-striped table-hover">
+	                         <thead>
+	                             <tr>
+	                                 <th style="width: 45%;">Invoice ID:</th>
+	                                 <td>{{invoiceInfo.invoice_id}}</td>
+	                             </tr>
+	                              <tr>
+	                                 <th>Invoice Type:</th>
+	                                 <td>{{invoiceInfo.invoice_type}}</td>
+	                             </tr>
+	                             <tr>
+	                                 <th>Invoice Date:</th>
+	                                 <td>{{invoiceInfo.invoice_date}}</td>
+	                             </tr>
+	                             <tr>
+	                                 <th>Quantity:</th>
+	                                 <td>{{invoiceInfo.quantity}} m&sup3;</td>
+	                             </tr>
+	                             <tr>
+	                                 <th>Invoice Amount:</th>
+	                                 <td>{{invoiceInfo.invoice_amount}} &euro;</td>
+	                             </tr>
+	                             <tr>
+	                                 <th>VAT:</th>
+	                                 <td>{{invoiceInfo.vat*100}}%</td>
+	                             </tr>
+	                             <tr>
+	                                 <th>Total Amount:</th>
+	                                 <td>{{invoiceInfo.total_amount}} &euro;</td>
+	                             </tr>
+	                             <tr>
+	                                 <th>Shipment ID:</th>
+	                                 <td>{{invoiceInfo.shipment_id}}</td>
+	                             </tr>
+	                             <tr>
+	                                 <th>Transporter Name:</th>
+	                                 <td>{{invoiceInfo.transporter_id}}</td>
+	                             </tr>
+
+	                              <tr>
+	                                 <th>Status:</th>
+	                                 <td>{{invoiceInfo.status}}</td>
+	                             </tr>
+	                              <tr>
+	                                 <th>Created By:</th>
+	                                 <td>{{invoiceInfo.created_by}}</td>
+	                             </tr>
+	                              <tr>
+	                                 <th>Create Date:</th>
+	                                 <td>{{invoiceInfo.created_date}}</td>
+	                             </tr>
+	                         </thead>
+	                     </table>
+	                 </div>
+	                <div class="modal-footer">
+	                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+	                </div>
+	             </div>
+	          </div>
+	       </div>
+
+
+
+</div>
+</div>

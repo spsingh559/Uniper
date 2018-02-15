@@ -1,0 +1,74 @@
+    <div ng-controller="supplierController">
+        <div class="container-fluid">
+            <div class="panel-group">
+      
+                <div class="panel panel-primary">
+                    <div class="panel-heading" >Invoice</div>
+                        <div class="panel-body">
+                            <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 45%;">Invoice ID:</th>
+                                            <td>{{invSupData.invoice_id}}</td>
+                                        </tr>
+			<tr>
+                                            <th>Invoice Type:</th>
+                                            <td>{{invSupData.invoiceType}}</td>
+                                        </tr>
+			<tr>
+                                            <th>Supplier Name:</th>
+                                            <td>{{invSupData.supplierName}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Invoice Date:</th>
+                                            <td>{{invSupData.invoiceDate}}</td>
+                                        </tr>
+		
+                                        <tr>
+                                            <th>Quantity:</th>
+                                            <td>{{invSupData.quantity}}</td>
+                                        </tr>                                  
+                                        
+                                        
+                                        <tr>
+                                            <th>Shipment ID:</th>
+                                            <td>{{invSupData.shipment_id}}</td>
+                                        </tr>
+			<tr>
+                                            <th>Invoice Amount:</th>
+                                            <td>{{invSupData.invoiceAmount}}</td>
+                                        </tr>
+                                       <tr>
+                                            <th>Vat:</th>
+                                            <td>{{invSupData.vat}}</td>
+                                        </tr>
+                                       <tr>
+                                            <th>Total Amount :</th>
+                                            <td>{{invSupData.totalAmount}}</td>
+                                        </tr>
+            
+                                        <tr>
+                                            <th>Status:</th>
+                                            <td>{{invSupData.status}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Created By:</th>
+                                            <td>{{invSupData.createdBy}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Created Date:</th>
+                                            <td>{{invSupData.createdDate}}</td>
+                                        </tr>
+                                    </thead>
+                           </table>
+                            <div class="pull-right">
+                           <button type="button" class = "btn btn-info">Pay Invoice</button>
+                           <button type="button" class = "btn btn-info" ng-click="supplierPage()">Cancel</button>
+                          </div>
+                    </div>
+                </div>
+            </div>
+    </div>                     
+    </div>
+        
+

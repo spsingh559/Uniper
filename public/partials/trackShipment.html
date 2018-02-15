@@ -1,0 +1,265 @@
+<div ng-controller="customerController">
+  <div class="container-fluid">
+
+<table class="table " style="width:42%;">
+     <thead>
+
+      <tr>
+        <th>Shipment ID:</th>
+        <td>{{shipmentDataToTrackShipment.shipment_id}}</td>
+      </tr>
+
+      <tr>
+        <th>Shipment Status:</th>
+        <td>{{shipmentDataToTrackShipment.status}}</td>
+      </tr>
+      <tr>
+        <th>CTID:</th>
+        <td>{{shipmentDataToTrackShipment.ctid}}</td>
+      </tr>
+      <tr>
+        <th>Last Updated By/Date:</th>
+        <td>{{shipmentDataToTrackShipment.updated_by}}/ {{shipmentDataToTrackShipment.last_update_date}}</td>
+      </tr>
+    </thead>
+  </table>
+
+  <div class = "panel-group">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Track Shipment</div>
+      <div class="panel-body">
+       <table class="table  table-responsive" style="background-color:aliceblue;">
+         <thead style="background-color:aliceblue; font-color:black">
+          <tr>
+           <th>Step Name</th>
+           <th>Completion Flag</th>
+           <th>Completion date</th>
+           <th>Supporting Doc</th>
+           <th>Quantity</th>
+         </tr>
+       </thead>
+       <tbody>
+        <form role="form" class="form-horizontal">
+          <tr >
+            <td>
+              <label for="containerLoadingDetails" class=" control-label">Container Loading Details</label>
+            </td>
+            <td>
+              <select class="form-control col-sm-4" id="containerLoadingDetails" class="form-control" ng-disabled="true" ng-model="shipmentDataToTrackShipment.supplier_load_flag">
+                         <option>N</option>
+                          <option>Y</option>
+                        </select>
+            </td>
+            <td>
+              <input id="clDate" type="date" ng-model="shipmentDataToTrackShipment.supplier_load_date" required="" class="form-control"  ng-disabled="true" >
+            </td>
+            <td>
+              <!-- <input type="file" name="clFile" file-model="shipmentDataToTrackShipment.supplier_supporting_doc_name"  ng-disabled="true" /> -->
+              <span><a target="_blank" ng-href="{{'/Documents/' + shipmentDataToTrackShipment.supplier_supporting_doc_name}}">
+                {{shipmentDataToTrackShipment.supplier_supporting_doc_name}}</a>
+              </span>
+            </td>
+            <td>
+              <input id="clQuantity" type="text" ng-model="shipmentDataToTrackShipment.supplier_load_quantity" required="" class="form-control"  ng-disabled="true" >
+            </td>
+
+          </tr>
+<!-- Second Row -->
+          <tr >
+            <td>
+              <label for="caDetails" class=" control-label">Container Arrival Details</label>
+            </td>
+            <td>
+              <select class="form-control col-sm-4" id="caDetails" class="form-control" ng-model="shipmentDataToTrackShipment.container_arrival_flag"  ng-disabled="true" >
+                         <option>N</option>
+                          <option>Y</option>
+                        </select>
+            </td>
+            <td>
+              <input id="caDate" type="date" ng-model="shipmentDataToTrackShipment.container_arrival_date" required="" class="form-control"  ng-disabled="true" >
+            </td>
+            <td>
+               <!-- <input type="file" name="caFile" ng-model="shipmentDataToTrackShipment.container_arrival_doc_name"  ng-disabled="true" /> -->
+               <span><a target="_blank" ng-href="{{'/Documents/' + shipmentDataToTrackShipment.container_arrival_doc_name}}">
+                 {{shipmentDataToTrackShipment.container_arrival_doc_name}}</a>
+               </span>
+            </td>
+            <td>
+              <input id="clQuantity" type="text" ng-model="shipmentDataToTrackShipment.supplier_load_quantity" required="" class="form-control"
+              ng-disabled="true">
+            </td>
+
+          </tr>
+          <!-- Third Row -->
+          <tr >
+            <td>
+              <label for="caDetails" class=" control-label">Ship Loading Details</label>
+            </td>
+            <td>
+              <select class="form-control col-sm-4" id="slDetails" class="form-control"  ng-model="shipmentDataToTrackShipment.load_to_ship_flag"  ng-disabled="true" >
+                         <option>N</option>
+                          <option>Y</option>
+                        </select>
+            </td>
+            <td>
+              <input id="slDate" type="date" ng-model="shipmentDataToTrackShipment.container_load_date" required="" class="form-control"  ng-disabled="true" >
+            </td>
+            <td>
+              <span><a target="_blank" ng-href="{{'/Documents/' + shipmentDataToTrackShipment.container_load_doc_name}}">
+                {{shipmentDataToTrackShipment.container_load_doc_name}}</a>
+              </span>
+              <!-- <input type="file" name="slFile" ng-model="shipmentDataToTrackShipment.container_load_doc_name"  ng-disabled="true"  /> -->
+            </td>
+            <td>
+              <input id="clQuantity" type="text" ng-model="shipmentDataToTrackShipment.supplier_load_quantity" required="" class="form-control"
+              ng-disabled="true">
+            </td>
+
+          </tr>
+<!-- Fourth Row -->
+          <tr >
+            <td>
+              <label for="caDetails" class=" control-label">Ship Arrival Details</label>
+            </td>
+            <td>
+              <select class="form-control col-sm-4" id="saDetails" class="form-control" ng-model="shipmentDataToTrackShipment.ship_arrival_flag"  ng-disabled="true" >
+                         <option>N</option>
+                          <option>Y</option>
+                        </select>
+            </td>
+            <td>
+              <input id="saDate" type="date" ng-model="shipmentDataToTrackShipment.ship_arrival_date" required="" class="form-control"  ng-disabled="true" >
+            </td>
+            <td>
+              <span><a target="_blank" ng-href="{{'/Documents/' + shipmentDataToTrackShipment.ship_arrival_doc_name}}">
+                {{shipmentDataToTrackShipment.ship_arrival_doc_name}}</a>
+              </span>
+             <!-- <input type="file" name="saFile"  ng-model="shipmentDataToTrackShipment.ship_arrival_doc_name"  ng-disabled="true" /> -->
+            </td>
+            <td>
+              <input id="clQuantity" type="text" ng-model="shipmentDataToTrackShipment.supplier_load_quantity" required="" class="form-control"
+              ng-disabled="true">
+            </td>
+
+          </tr>
+
+          <!-- Fifth Row -->
+          <tr >
+            <td>
+              <label for="caDetails" class=" control-label">Container Offloading Details</label>
+            </td>
+            <td>
+              <select class="form-control col-sm-4" id="coDetails" class="form-control"  ng-model="shipmentDataToTrackShipment.container_offload_flag"  ng-disabled="true" >
+                         <option>N</option>
+                          <option>Y</option>
+                        </select>
+            </td>
+            <td>
+              <input id="coDate" type="date" ng-model="shipmentDataToTrackShipment.container_offload_date" required="" class="form-control"  ng-disabled="true" >
+            </td>
+            <td>
+              <span><a target="_blank" ng-href="{{'/Documents/' + shipmentDataToTrackShipment.container_offload_doc_name}}">
+                {{shipmentDataToTrackShipment.container_offload_doc_name}}</a>
+              </span>
+              <!-- <input type="file" name="coFile"  ng-model="shipmentDataToTrackShipment.container_offload_doc_name"  ng-disabled="true" /> -->
+            </td>
+            <td>
+              <input id="clQuantity" type="text" ng-model="shipmentDataToTrackShipment.supplier_load_quantity"  required="" class="form-control"
+              ng-disabled="true">
+            </td>
+
+          </tr>
+
+          <!-- Sixth Row -->
+          <tr >
+            <td>
+              <label for="caDetails" class=" control-label">Bunkering Readiness Details</label>
+            </td>
+            <td>
+              <select class="form-control col-sm-4" id="brDetails" class="form-control"  ng-model="shipmentDataToTrackShipment.bunkering_ready_flag"  ng-disabled="true" >
+                         <option>N</option>
+                          <option>Y</option>
+                        </select>
+            </td>
+            <td>
+              <input id="brDate" type="date" ng-model="shipmentDataToTrackShipment.bunkering_ready_date" required="" class="form-control"  ng-disabled="true" >
+            </td>
+            <td>
+              <span><a target="_blank" ng-href="{{'/Documents/' + shipmentDataToTrackShipment.bunkering_ready_doc_name}}">
+                {{shipmentDataToTrackShipment.bunkering_ready_doc_name}}</a>
+              </span>
+               <!-- <input type="file" name="brFile" ng-model="shipmentDataToTrackShipment.bunkering_ready_doc_name"  ng-disabled="true" /> -->
+            </td>
+            <td>
+              <input id="clQuantity" type="text"  ng-model="shipmentDataToTrackShipment.supplier_load_quantity" required="" class="form-control"
+              ng-disabled="true">
+            </td>
+
+          </tr>
+          <!-- seventh Row -->
+          <tr >
+            <td>
+              <label for="supplier" class=" control-label">Bunkering Completion Details</label>
+            </td>
+            <td>
+               <select class="form-control col-sm-4" id="bcDetails" class="form-control" ng-model="shipmentDataToTrackShipment.bunkering_complete_flag"  ng-disabled="true" >
+                         <option>N</option>
+                          <option>Y</option>
+                        </select>
+            </td>
+            <td>
+              <input id="bcDate" type="date" ng-model="shipmentDataToTrackShipment.bunkering_complete_date" required="" class="form-control"  ng-disabled="true" >
+            </td>
+            <td>
+              <span><a target="_blank" ng-href="{{'/Documents/' + shipmentDataToTrackShipment.bunkering_complete_doc_name}}">
+                {{shipmentDataToTrackShipment.bunkering_complete_doc_name}}</a>
+              </span>
+               <!-- <input type="file" name="bcFile"  ng-model="shipmentDataToTrackShipment.bunkering_complete_doc_name"  ng-disabled="true" /> -->
+            </td>
+            <td>
+              <input id="handoverDate" type="text" ng-model="shipmentDataToTrackShipment.supplier_load_quantity" required="" class="form-control" ng-disabled="true">
+            </td>
+
+          </tr>
+<!-- Eight Row -->
+          <tr >
+            <td>
+              <label for="supplier" class="control-label">Customer Handover Details</label>
+            </td>
+            <td>
+               <select class="form-control col-sm-4" id="caDetails" class="form-control" ng-model="shipmentDataToTrackShipment.customer_handover_flag" >
+                         <option>N</option>
+                          <option>Y</option>
+                        </select>
+            </td>
+            <td>
+              <input id="handoverDate" type="date"  required="" class="form-control" ng-model="shipmentDataToTrackShipment.customer_handover_date">
+            </td>
+            <td>
+              <input type="file" name="Bunkering" file-model="shipmentDataToTrackShipment.customer_handover_doc_name"/>
+              <span><a target="_blank" ng-href="{{'/Documents/' + shipmentDataToTrackShipment.customer_handover_doc_name}}">
+                {{shipmentDataToTrackShipment.customer_handover_doc_name}}</a>
+              </span>
+            </td>
+            <td>
+              <input id="handoverDate" type="text"  required="" class="form-control" ng-model="shipmentDataToTrackShipment.customer_quantity" >
+            </td>
+
+          </tr>
+
+
+
+        </form>
+      </tbody>
+    </table>
+<div class = "pull-right">
+<button type="button" class="btn btn-success btn-md" ng-click="submitTrackShipmentData()">Submit
+<span class="glyphicon glyphicon-saved" /></button>
+</div>
+  </div>
+</div>
+</div>
+
+
+</div>
+</div>

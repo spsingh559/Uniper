@@ -1,0 +1,56 @@
+<div ng-controller="uniperController">
+      <div class="container-fluid">
+
+
+         <table class="table " style="width:42%;">
+                     <thead>
+
+                      <tr>
+                        <th>Demand Request ID:</th>
+                        <td>{{demandReqHistory[0].Value.drid}}</td>
+                      </tr>
+
+                      <tr>
+                        <th>Customer ID:</th>
+                        <td>{{demandReqHistory[0].Value.customer_id}}</td>
+</tr>
+                     </thead>
+                  </table>
+
+      <div class = "panel-group">
+        <div class="panel panel-primary">
+          <div class="panel-heading">History</div>
+          <div class="panel-body">
+             <table class="table  table-responsive" style="background-color:aliceblue;">
+               <thead style="background-color:aliceblue; font-color:black">
+                  <tr>
+                       <th>Index</th>
+                     <th>Status</th>
+                     <th>Quantity</th>
+                     <th>Location</th>
+                     <th>Delivery Date</th>
+                     <th>Total Price</th>
+                     <th>Updated By</th>
+                     <th>Updated Date</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr ng-repeat="data in demandReqHistory track by $index">
+                    <td>{{$index+1}}</td>
+                    <td>{{data.Value.status}}</td>
+                    <td>{{data.Value.volume}}</td>
+                    <td>{{data.Value.delivery_location_country}}</td>
+                    <td>{{data.Value.delivery_date}}</td>
+                    <td>{{data.Value.price}}</td>
+                  <td>{{data.Value.updated_by}}</td>
+                  <td>{{data.Timestamp}}</td>
+                  </tr>
+               </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+</div>
+</div>

@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MyApp">
+  <head>
+    <title>seller</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Fonts-->
+    <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet" type="text/css">
+    <!-- CSS Libs-->
+    <link rel="stylesheet" type="text/css" href="resources/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="resources/lib/css/bootstrap.css">
+    <!-- CSS App-->
+    <!-- link(rel='stylesheet', type='text/css', href='resources/css/style.css')-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet" type="text/css">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="js/angular/angular.js"></script>
+    <script type="text/javascript" src="js/angular/angular-route.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/controllers.js"></script>
+    <script type="text/javascript" src="resources/lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="resources/lib/js/bootstrap.min.js"></script>
+    <script>
+      function adClass() {
+      $('body').addClass('no-pad');
+      console.log("dsuhgi");
+      }
+    </script>
+    <style type="text/css">
+      .no-pad{ padding: 0px !important; margin: 0px !important; }
+      .modal-open .navbar-fixed-top,
+      .modal-open .navbar-fixed-bottom {
+      padding-right: 17px;
+      }
+      @media screen and (min-width: 768px) {
+      .modal-dialog {
+      width: 700px;
+      /* New width for default modal */
+      }
+      .modal-sm {
+      width: 350px;
+      /* New width for small modal */
+      }
+      }
+      @media screen and (min-width: 992px) {
+      .modal-lg {
+      width: 950px;
+      /* New width for large modal */
+      }
+      }
+      body.modal-open {
+      overflow: auto;
+      }
+      body.modal-open[style] {
+      padding-right: 0px !important;
+      }
+      .modal::-webkit-scrollbar {
+      width: 0 !important;
+      /*removes the scrollbar but still scrollable*/
+      /* reference: http://stackoverflow.com/a/26500272/2259400 */
+      }
+      .glyphicon {
+      font-size: 50px;
+      border: 5px solid crimson;
+      overflow:hidden
+      }
+    </style>
+  </head>
+  <body ng-controller="sellerController" style="background-color:#f0f0f0;">
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <ul class="nav navbar-nav">
+              <li style=" margin-top:6px;" class="navbar-left">
+                <h4><font color="white">Seller Dashboard</font></h4>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li style="margin-right:20px; margin-top:6px;">
+                <h4><font color="white">Logged in as: Seller</font></h4>
+              </li>
+              <li style=" margin-top:6px;">
+                <h4><a href="login"><font color="white">Sign Out</font></a></h4>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="pull-right col-md-3">
+        <h3>Account Balance: {{sellerbalance}}</h3>
+      </div>
+      <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+          <div id="modelsellerPayment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <!-- Modal Header-->
+                <div class="modal-header">
+                  <button type="button" data-dismiss="modal" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                  <h4 id="myModalLabel" class="modal-title">Payment Details</h4>
+                </div>
+                <!-- Modal Body-->
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                      <table class="table table-striped table-hover">
+                        <thead>
+                          <tr>
+                            <th>Payment ID</th>
+                            <td>{{modalPayment.paymentId}}</td>
+                          </tr>
+                          <tr>
+                            <th>Agreement ID</th>
+                            <td>{{modalPayment.agreementId}}</td>
+                          </tr>
+                          <tr>
+                            <th>Buyer Name</th>
+                            <td>{{modalPayment.buyerName}}</td>
+                          </tr>
+                          <tr>
+                            <th>Seller Name</th>
+                            <td>{{modalPayment.sellerName}}</td>
+                          </tr>
+                          <tr>
+                            <th>Buyer Bank Name</th>
+                            <td>{{modalPayment.bb_name}}</td>
+                          </tr>
+                          <tr>
+                            <th>Seller Bank Name</th>
+                            <td>{{modalPayment.sb_name}}</td>
+                          </tr>
+                          <tr>
+                            <th>Buyer Account</th>
+                            <td>{{modalPayment.buyerAccount}}</td>
+                          </tr>
+                          <tr>
+                            <th>Amount</th>
+                            <td>{{modalPayment.amountTransferred}}</td>
+                          </tr>
+                          <tr>
+                            <th>Payment Date</th>
+                            <td>{{modalPayment.paymentCUDate | date:'MM-dd-yyyy HH:mm'}}</td>
+                          </tr>
+                          <tr>
+                            <th>Payment Status</th>
+                            <td>{{modalPayment.paymentStatus}}</td>
+                          </tr>
+                          <tr>
+                            <th>Payment Deadline Date</th>
+                            <td>{{modalPayment.paymentDeadlineDate| date:'MM-dd-yyyy HH:mm'}}</td>
+                          </tr>
+                          <div class="col-sm-1"></div>
+                        </thead>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <!-- Modal Footer-->
+                <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="buyerApprovalModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <!-- Modal Header-->
+              <div class="modal-header">
+                <button type="button" data-dismiss="modal" class="close"></button>
+                <h4 id="myModalLabel" class="modal-title">Approval Details</h4>
+              </div>
+              <!-- Modal Body-->
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-1"></div>
+                  <div class="col-sm-10">
+                    <table class="table table-striped table-hover">
+                      <thead>
+                        <!--
+                        <tr>
+                        <th style="vertical-align:middle">Buyer
+                        </th>
+                        <td style="vertical-align: middle"><i class="fa fa-spinner" </i>
+                        </td>
+                        <td>
+                        <input type="checkbox" id="toggle-trigger" data-toggle="toggle" data-size="normal" data-on="Approve" data-width="85" data-off="Reject">
+                        </td>
+                        </tr>
+                        -->
+                        <tr>
+                          <th style="vertical-align:middle">Buyer</th>
+                          <td style="vertical-align: middle"><i ng-show="modalSpin" class="fa fa-spinner fa-spin"></i><i style="color:green;" ng-if="modalcheck=='true'" class="fa fa-check"></i><i style="color:red;" ng-if="modalcheck=='false'" class="fa fa-close"></i></td>
+                        </tr>
+                        <tr>
+                          <th style="vertical-align:middle">Seller</th>
+                          <td style="vertical-align: middle"><i ng-show="modalSpin" class="fa fa-spinner fa-spin"></i><i style="color:green;" ng-if="modalcheckSeller=='true'" class="fa fa-check"></i><i style="color:red;" ng-if="modalcheckSeller=='false'" class="fa fa-close"></i></td>
+                        </tr>
+                        <tr>
+                          <th style="vertical-align:middle">Buyer Bank</th>
+                          <td style="vertical-align: middle"><i ng-show="modalSpin" class="fa fa-spinner fa-spin"></i><i style="color:green;" ng-if="modalcheckBuyerBank=='true'" class="fa fa-check"></i><i style="color:red;" ng-if="modalcheckBuyerBank=='false'" class="fa fa-close"></i></td>
+                        </tr>
+                        <tr>
+                          <th style="vertical-align:middle">Seller Bank</th>
+                          <td style="vertical-align: middle"><i ng-show="modalSpin" class="fa fa-spinner fa-spin"></i><i style="color:green;" ng-if="modalcheckSellerBank=='true'" class="fa fa-check"></i><i style="color:red;" ng-if="modalcheckSellerBank=='false'" class="fa fa-close"></i></td>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                  <div class="col-sm-1"></div>
+                </div>
+              </div>
+              <!-- Modal Footer-->
+              <div class="modal-footer">
+                <button type="button" data-dismiss="modal" ng-click="refresh()" class="btn btn-default">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="modelPO" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <!-- Modal Header-->
+              <div class="modal-header">
+                <button type="button" data-dismiss="modal" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 id="myModalLabel" class="modal-title">PO Details</h4>
+              </div>
+              <!-- Modal Body-->
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-1"></div>
+                  <div class="col-sm-10">
+                    <table class="table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th>PO ID</th>
+                          <td>{{modalPO.transId}}</td>
+                        </tr>
+                        <tr>
+                          <th>Buyer Name</th>
+                          <td>{{modalPO.buyerName}}</td>
+                        </tr>
+                        <tr>
+                          <th>Seller Name</th>
+                          <td>{{modalPO.sellerName}}</td>
+                        </tr>
+                        <tr>
+                          <th>Last Modified on</th>
+                          <td>{{modalPO.po_date | date:'MM-dd-yyyy HH:mm'}}</td>
+                        </tr>
+                        <tr>
+                          <th>PO Expected Delivery Date</th>
+                          <td>{{modalPO.expectedDeliveryDate | date:'MM-dd-yyyy HH:mm'}}</td>
+                        </tr>
+                        <tr>
+                          <th>Goods Price</th>
+                          <td>{{modalPO.price}}</td>
+                        </tr>
+                        <tr>
+                          <th style="vertical-align: middle">Item List</th>
+                          <td style="vertical-align: middle">
+                            <ul class="list-unstyled">
+                              <li ng-repeat="POitem in modalPO.item_name.split(',') track by $index"><span class="badge">{{modalPO.item_quantity.split(',')[$index]}}</span> {{modalPO.item_name.split(',')[$index]}}</li>
+                            </ul>
+                            <!-- {{modalPO.item_name}}<span class="badge">{{modalPO.item_quantity}}</span></td>-->
+                          </td>
+                        </tr>
+                        <tr>
+                          <th>PO Status</th>
+                          <td>{{modalPO.po_status}}</td>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                  <div class="col-sm-1"></div>
+                </div>
+              </div>
+              <!-- Modal Footer-->
+              <div class="modal-footer">
+                <button type="button" data-dismiss="modal" onclick="adClass();" class="btn btn-default">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="sellerApprovalModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <!-- Modal Header-->
+              <div class="modal-header">
+                <h4 id="myModalLabel" class="modal-title">Approval Details</h4>
+              </div>
+              <!-- Modal Body-->
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-1"></div>
+                  <div class="col-sm-10">
+                    <table class="table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th style="vertical-align:middle">Buyer</th>
+                          <td style="vertical-align: middle"><i ng-show="sellermodalSpin" class="fa fa-spinner fa-spin"></i><i style="color:green;" ng-if="modalcheck_buyer=='true'" class="fa fa-check"></i><i style="color:red;" ng-if="modalcheck_buyer=='false'" class="fa fa-close"></i></td>
+                        </tr>
+                        <tr>
+                          <th style="vertical-align:middle">Seller</th>
+                          <td style="vertical-align: middle"><i ng-show="sellermodalSpin" class="fa fa-spinner fa-spin"></i><i style="color:green;" ng-if="modalcheck_seller=='true'" class="fa fa-check"></i><i style="color:red;" ng-if="modalcheck_seller=='false'" class="fa fa-close"></i></td>
+                        </tr>
+                        <tr>
+                          <th style="vertical-align:middle">Buyer Bank</th>
+                          <td style="vertical-align: middle"><i ng-show="sellermodalSpin" class="fa fa-spinner fa-spin"></i><i style="color:green;" ng-if="modalcheck_buyerBank=='true'" class="fa fa-check"></i><i style="color:red;" ng-if="modalcheck_buyerBank=='false'" class="fa fa-close"></i></td>
+                        </tr>
+                        <tr>
+                          <th style="vertical-align:middle">Seller Bank</th>
+                          <td style="vertical-align: middle"><i ng-show="sellermodalSpin" class="fa fa-spinner fa-spin"></i><i style="color:green;" ng-if="modalcheck_sellerBank=='true'" class="fa fa-check"></i><i style="color:red;" ng-if="modalcheck_sellerBank=='false'" class="fa fa-close"></i></td>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                  <div class="col-sm-1"></div>
+                </div>
+              </div>
+              <!-- Modal Footer-->
+              <div class="modal-footer">
+                <button type="button" data-dismiss="modal" ng-click="refresh()" class="btn btn-default">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="buyerBankApprovalModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <!-- Modal Header-->
+              <div class="modal-header">
+                <button type="button" data-dismiss="modal" class="close"></button>
+                <h4 id="myModalLabel" class="modal-title">Approval Details</h4>
+              </div>
+              <!-- Modal Body-->
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-1"></div>
+                  <div class="col-sm-10">
+                    <table class="table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th style="vertical-align:middle">Buyer</th>
+                          <td style="vertical-align: middle"><i ng-show="sellermodalSpin" class="fa fa-spinner fa-spin"></i><i style="color:green;" ng-if="modalcheck_buyer=='true'" class="fa fa-check"></i><i style="color:red;" ng-if="modalcheck_buyer=='false'" class="fa fa-close"></i></td>
+                        </tr>
+                        <tr>
+                          <th style="vertical-align:middle">Seller</th>
+                          <td style="vertical-align: middle"><i ng-show="sellermodalSpin" class="fa fa-spinner fa-spin"></i><i style="color:green;" ng-if="modalcheck_seller=='true'" class="fa fa-check"></i><i style="color:red;" ng-if="modalcheck_seller=='false'" class="fa fa-close"></i></td>
+                        </tr>
+                        <tr>
+                          <th style="vertical-align:middle">Buyer Bank</th>
+                          <td style="vertical-align: middle"><i ng-show="sellermodalSpin" class="fa fa-spinner fa-spin"></i><i style="color:green;" ng-if="modalcheck_buyerBank=='true'" class="fa fa-check"></i><i style="color:red;" ng-if="modalcheck_buyerBank=='false'" class="fa fa-close"></i></td>
+                        </tr>
+                        <tr>
+                          <th style="vertical-align:middle">Seller Bank</th>
+                          <td style="vertical-align: middle"><i ng-show="sellermodalSpin" class="fa fa-spinner fa-spin"></i><i style="color:green;" ng-if="modalcheck_sellerBank=='true'" class="fa fa-check"></i><i style="color:red;" ng-if="modalcheck_sellerBank=='false'" class="fa fa-close"></i></td>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                  <div class="col-sm-1"></div>
+                </div>
+              </div>
+              <!-- Modal Footer-->
+              <div class="modal-footer">
+                <button type="button" data-dismiss="modal" ng-click="refresh()" class="btn btn-default">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="sellerBankApprovalModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <!-- Modal Header-->
+              <div class="modal-header">
+                <button type="button" data-dismiss="modal" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 id="myModalLabel" class="modal-title">Approval Details</h4>
+              </div>
+              <!-- Modal Body-->
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-1"></div>
+                  <div class="col-sm-10">
+                    <table class="table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th style="vertical-align:middle">Buyer</th>
+                          <td style="vertical-align: middle"><i ng-show="sellermodalSpin" class="fa fa-spinner fa-spin"></i><i style="color:green;" ng-if="modalcheck_buyer=='true'" class="fa fa-check"></i><i style="color:red;" ng-if="modalcheck_buyer=='false'" class="fa fa-close"></i></td>
+                        </tr>
+                        <tr>
+                          <th style="vertical-align:middle">Seller</th>
+                          <td style="vertical-align: middle"><i ng-show="sellermodalSpin" class="fa fa-spinner fa-spin"></i><i style="color:green;" ng-if="modalcheck_seller=='true'" class="fa fa-check"></i><i style="color:red;" ng-if="modalcheck_seller=='false'" class="fa fa-close"></i></td>
+                        </tr>
+                        <tr>
+                          <th style="vertical-align:middle">Buyer Bank</th>
+                          <td style="vertical-align: middle"><i ng-show="sellermodalSpin" class="fa fa-spinner fa-spin"></i><i style="color:green;" ng-if="modalcheck_buyerBank=='true'" class="fa fa-check"></i><i style="color:red;" ng-if="modalcheck_buyerBank=='false'" class="fa fa-close"></i></td>
+                        </tr>
+                        <tr>
+                          <th style="vertical-align:middle">Seller Bank</th>
+                          <td style="vertical-align: middle"><i ng-show="sellermodalSpin" class="fa fa-spinner fa-spin"></i><i style="color:green;" ng-if="modalcheck_sellerBank=='true'" class="fa fa-check"></i><i style="color:red;" ng-if="modalcheck_sellerBank=='false'" class="fa fa-close"></i></td>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                  <div class="col-sm-1"></div>
+                </div>
+              </div>
+              <!-- Modal Footer-->
+              <div class="modal-footer">
+                <button type="button" data-dismiss="modal" ng-click="refresh()" class="btn btn-default">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="modelSellerAgreement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <!-- Modal Header-->
+              <div class="modal-header">
+                <button type="button" data-dismiss="modal" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 id="myModalLabel" class="modal-title">Agreement Details</h4>
+              </div>
+              <!-- Modal Body-->
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-1"></div>
+                  <div class="col-sm-10">
+                    <table class="table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th>Agreement ID</th>
+                          <td>{{ modal_agreement.agreementId }}</td>
+                        </tr>
+                        <tr>
+                          <th>POID</th>
+                          <td>{{ modal_agreement.transId }}</td>
+                        </tr>
+                        <tr>
+                          <th>Shipper</th>
+                          <td>{{ modal_agreement.shipper_name }}</td>
+                        </tr>
+                        <tr>
+                          <th>Buyer Bank</th>
+                          <td>{{ modal_agreement.bb_name }}</td>
+                        </tr>
+                        <tr>
+                          <th>Seller Bank</th>
+                          <td>{{ modal_agreement.sb_name }}</td>
+                        </tr>
+                        <tr>
+                          <th>Total Price</th>
+                          <td>{{ modal_agreement.total_value }}</td>
+                        </tr>
+                        <tr>
+                          <th>Port Authority</th>
+                          <td>{{ modal_agreement.agreementPortAuth_name }}</td>
+                        </tr>
+                        <tr>
+                          <th>File</th>
+                          <td><a target="_blank" ng-href="{{'/Documents/' + modal_agreement.document_name}}">{{ modal_agreement.document_name }}</a></td>
+                        </tr>
+                        <tr>
+                          <th>Terms & Conditions</th>
+                          <td>{{ modal_agreement.tc_text }}</td>
+                        </tr>
+                        <tr>
+                          <th>Status</th>
+                          <td>{{ modal_agreement.agreement_status }}</td>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                  <div class="col-sm-1"></div>
+                </div>
+              </div>
+              <!-- Modal Footer-->
+              <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="modelSellerPendingAgreement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <!-- Modal Header-->
+            <div class="modal-header">
+              <button type="button" data-dismiss="modal" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <h4 id="myModalLabel" class="modal-title">Agreement Details</h4>
+            </div>
+            <!-- Modal Body-->
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-10">
+                  <table class="table table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th>Agreement ID</th>
+                        <td>{{ modal_agreement.agreementId }}</td>
+                      </tr>
+                      <tr>
+                        <th>POID</th>
+                        <td>{{ modal_agreement.transId }}</td>
+                      </tr>
+                      <tr>
+                        <th>Shipper</th>
+                        <td>{{ modal_agreement.shipper_name }}</td>
+                      </tr>
+                      <tr>
+                        <th>Buyer Bank</th>
+                        <td>{{ modal_agreement.bb_name }}</td>
+                      </tr>
+                      <tr>
+                        <th>Seller Bank</th>
+                        <td>{{ modal_agreement.sb_name }}</td>
+                      </tr>
+                      <tr>
+                        <th>Total Price</th>
+                        <td>{{ modal_agreement.total_value }}</td>
+                      </tr>
+                      <tr>
+                        <th>Port Authority</th>
+                        <td>{{ modal_agreement.agreementPortAuth_name }}</td>
+                      </tr>
+                      <tr>
+                        <th>File</th>
+                        <td>{{ modal_agreement.document_name }}</td>
+                      </tr>
+                      <tr>
+                        <th>Terms & Conditions</th>
+                        <td>{{ modal_agreement.tc_text }}</td>
+                      </tr>
+                      <tr>
+                        <th>Status</th>
+                        <td>{{ modal_agreement.agreement_status }}</td>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+                <div class="col-sm-1"></div>
+              </div>
+            </div>
+            <!-- Modal Footer-->
+            <div class="modal-footer">
+              <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal-->
+    <div id="POStatusmodel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header-->
+          <div class="modal-header">
+            <button type="button" data-dismiss="modal" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 id="myModalLabel" class="modal-title">PO Status</h4>
+          </div>
+          <!-- Modal Body-->
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-xs-12">
+                <form role="form" class="form-horizontal">
+                  <div class="form-group">
+                    <label for="transId" class="col-sm-4 control-label">POID:</label>
+                    <div class="col-sm-8">
+                      <input id="transId" type="text" ng-model="po.transId" disabled="" required="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="seller" class="col-sm-4 control-label">Seller Name:</label>
+                    <div class="col-sm-8">
+                      <input id="sellerName" type="text" ng-model="po.sellerName" disabled="" required="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="seller" class="col-sm-4 control-label">Buyer Name:</label>
+                    <div class="col-sm-8">
+                      <input id="BuyerName" type="text" ng-model="po.buyerName" disabled="" required="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="seller" class="col-sm-4 control-label">Goods Price:</label>
+                    <div class="col-sm-8">
+                      <input id="price" type="text" ng-model="po.price" required="" class="form-control">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="date" class="col-sm-4 control-label">Expected Delivery Date:</label>
+                    <div style="text-align: middle; margin-top: 6px;" class="col-sm-8"><span>{{po.expectedDeliveryDate| date:'MM-dd-yyyy HH:mm'}}</span></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="seller" class="col-sm-4 control-label">PO Status:</label>
+                    <div class="col-sm-8">
+                      <input id="po_status" type="text" placeholder="Approved By Seller" ng-model="po_status" disabled="" required="" class="form-control">
+                    </div>
+                  </div>
+                </form>
+                <div class="row">
+                  <div class="col-sm-1"></div>
+                  <div class="col-sm-10">
+                    <table class="table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th>ITEM ID</th>
+                          <th>ITEMS</th>
+                          <th>QUANTITY</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="item in po.item_name.split(',') track by $index">
+                          <td ng-model="item_id">{{po.item_id.split(',')[$index]  }}</td>
+                          <td ng-model="item_name">{{po.item_name.split(',')[$index]}}</td>
+                          <td ng-model="item_quantity">{{po.item_quantity.split(',')[$index]}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="col-sm-1"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal Footer-->
+          <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+            <button type="button" ng-click="updatePO()" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+          <div style="margin:0px;" class="page-header">
+            <h1 id="tables"><font size="5" color="black"><b>PO DEPLOYED</b></font></h1>
+            <div class="pull-right"><a id="updatePOBtn" href="#" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#model" ng-click="open();" class="btn btn-primary btn-sm">PO Update</a></div>
+            <div class="bs-component">
+              <table class="table table-striped table-hover">
+                <thead>
+                  <th>Select</th>
+                  <th>POID</th>
+                  <th>Seller</th>
+                  <th>Buyer</th>
+                  <th>Price</th>
+                  <th>Expected date delivery</th>
+                  <th>Create/Update PO</th>
+                  <th>PO status</th>
+                  <th>Item List</th>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="PO in sellerPOs track by $index">
+                    <td style="vertical-align: middle">
+                      <input id="yourPORadio" type="radio" name="yourPORadio" ng-click="radio_sel(PO)" ng-hide="{{PO.price !='0'}}">
+                    </td>
+                    <td style="vertical-align: middle"><a href="#" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modelPO" ng-click="getPODetails(PO)">{{PO.transId }}</a></td>
+                    <td style="vertical-align: middle">{{PO.sellerName}}</td>
+                    <td style="vertical-align: middle">{{PO.buyerName}}</td>
+                    <td style="vertical-align: middle">{{PO.price}}</td>
+                    <td style="vertical-align: middle">{{PO.expectedDeliveryDate | date:'MM-dd-yyyy HH:mm'}}</td>
+                    <td style="vertical-align: middle">{{PO.po_date | date:'MM-dd-yyyy HH:mm'}}</td>
+                    <td style="vertical-align: middle">{{PO.po_status}}</td>
+                    <td>
+                      <ul class="list-unstyled">
+                        <li ng-repeat="POitem in PO.item_name.split(',')"><span class="badge">{{PO.item_quantity.split(',')[$index]}}</span> {{PO.item_name.split(',')[$index]}}</li>
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /example-->
+          </div>
+        </div>
+        <div class="col-sm-1"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+          <div style="margin:0px;" class="page-header">
+            <h1 id="tables"><font size="5" color="black"><b>AGREEMENTS DEPLOYED</b></font></h1>
+          </div>
+          <div class="bs-component">
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>Agreement ID</th>
+                  <th>POID</th>
+                  <th>Total Price</th>
+                  <th>Terms & Conditions</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="agreement in sellerAgreements track by $index">
+                  <td style="vertical-align: middle"><a href="#" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modelSellerAgreement" ng-click="sellerAgreementmodel(agreement)">{{ agreement.agreementId }}</a></td>
+                  <td style="vertical-align: middle"><a href="#" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modelPO" ng-click="get_PODetails(agreement.transId)">{{agreement.transId }}</a></td>
+                  <td style="vertical-align: middle">{{ agreement.total_value }}</td>
+                  <td style="vertical-align: middle">{{ agreement.tc_text }}</td>
+                  <td style="vertical-align: middle">{{ agreement.agreement_status }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-sm-1"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+          <div style="margin:0px;" class="page-header">
+            <h1 id="tables"><font size="5" color="black" weight="bold"><b>PAYMENTS</b></font></h1>
+          </div>
+          <div class="bs-component">
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>Payment ID</th>
+                  <th>Buyer Bank Name</th>
+                  <th>Seller Bank Name</th>
+                  <th>Amount</th>
+                  <th>Payment Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="payment in sellerPayments track by $index">
+                  <td><a href="" data-toggle="modal" ng-click="sellerPaymentmodel(payment)" data-backdrop="static" data-keyboard="false" data-target="#modelsellerPayment">{{payment.paymentId}}</a></td>
+                  <td>{{payment.bb_name}}</td>
+                  <td>{{payment.sb_name}}</td>
+                  <td>{{payment.amountTransferred}}</td>
+                  <td>{{payment.paymentStatus}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- /example-->
+        </div>
+        <div class="col-sm-1"></div>
+      </div>
+    </div>
+  </body>
+  <!-- Javascript Libs-->
+  <script type="text/javascript" src="resources/lib/js/jquery.min.js"></script>
+  <script type="text/javascript" src="resources/lib/js/bootstrap.min.js"></script>
+</html>

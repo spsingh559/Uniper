@@ -1,0 +1,91 @@
+<div ng-controller = "transporterController">
+  <div class="container-fluid">  
+   <form>
+       <div class="form-group">
+                            <label for="supplier" class="col-sm-1 control-label"></label>
+                            <div class="col-sm-3">
+                                <input id="Volume" type="text" ng-model="demandRequest.status" placeholder="Shipment ID" class="form-control">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Search</button>
+                        </form>
+      <center>
+        <div style="width: 100%">
+          <img src="resources/lib/css/img/download.png" class = "imgWidth" />
+          <img src="resources/lib/css/img/picture.png" class = "imgWidth"/>
+          <img src="resources/lib/css/img/images.png" class = "imgWidth"/>
+          <img src="resources/lib/css/img/picture.png" class = "imgWidth"/>
+          <img src="resources/lib/css/img/pic.png" class = "imgWidth"/>
+          <img src="resources/lib/css/img/picture.png" class = "imgWidth"/>
+           <img src="resources/lib/css/img/images.jpg" class = "imgWidth"/>
+        </div>
+      </center>
+<div class="Container" style="width: 96.6%">
+<div class="col-sm-3"  style="margin-top:55px;margin-left:50px;">
+<form role="form" class="form-horizontal" style="width:145%">
+                        <div class="form-group">
+                            <label for="supplier" class="col-sm-3 control-label">Load Complete?</label>
+                            <div class="col-sm-7" style="margin-top:15px;">
+                                <input id="supplier" type="text" ng-model="Bill.materialId" required="" placeholder="Y/N" class="form-control" disabled="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="supplier" class="col-sm-3 control-label">Actual Load Date:</label>
+                            <div class="col-sm-7" style="margin-top:15px;">
+                                <input id="Date" type="text" ng-model="Bill.name" required="" class="form-control" disabled="">
+                            </div>
+                        </div>
+</form>
+</div>
+</div>
+<div>
+<div class="col-sm-1"></div>
+<div class="col-sm-4" style="margin-top:15px;margin-right:60px;">
+   <div class="row" style="margin-top:15px;">
+      <div class="col-xs-6">
+         <form>
+    <div class="form-inline" style="margin-top:15px;">
+      <label for="email">Container Load to Ship Complete?</label>
+      <input type="email" class="form-control" id="email" placeholder="Y/N" name="email" disabled="">
+    </div>
+      <div class="form-inline" style="margin-top:15px;">
+      <label for="email">Container Load Date:</label>
+      <input type="email" class="form-control" id="email" placeholder="" name="email" disabled="">
+    </div>
+    </div>
+    </form>
+       <div class="col-xs-6">
+<form>
+    <div class="form-inline" style="margin-top:15px;">
+      <label for="email">Container Discharge Complete?</label>
+      <input type="email" class="form-control" id="email" placeholder="Y/N" name="email" disabled="">
+    </div>
+      <div class="form-inline" style="margin-top:15px;">
+      <label for="email">Container Discharge Date:</label>
+      <input type="email" class="form-control" id="email" placeholder="" name="email" disabled="">
+    </div>
+</form>
+       </div>
+         </div>                 
+</div>
+     <div class="col-sm-1"></div>
+       <div class="col-sm-3">
+        <form role="form" class="form-horizontal" style="margin-top:30px;">
+                        <div class="form-group">
+                            <label for="supplier" class="col-sm-3 control-label">Customer Handover Complete?</label>
+                            <div class="col-sm-7" style="margin-top:10px;">
+                                <input id="Location" type="text" ng-model="Bill.materialId" required="" placeholder="Y/N" class="form-control" disabled="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="supplier" class="col-sm-3 control-label">Handover Date:</label>
+                            <div class="col-sm-7" style="margin-top:10px;">
+                                <input id="Date" type="text" ng-model="Bill.name" required="" class="form-control" disabled="">
+                            </div>
+                        </div>
+        </form>
+       </div>
+     </div>
+     <div  style="margin-top:40px;"><center><button type="button" class="btn btn-info btn-md">SAVE</button></center></div>
+  </div>
+</div>

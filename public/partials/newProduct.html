@@ -1,0 +1,164 @@
+<div ng-controller="uniperController" >
+<div class="container-fluid">
+      <center>
+        <div style="width: 100%">
+          <img src="resources/lib/css/img/download.png" class = "imgWidth" />
+          <img src="resources/lib/css/img/picture.png" class = "imgWidth"/>
+          <img src="resources/lib/css/img/images.png" class = "imgWidth"/>
+          <img src="resources/lib/css/img/picture.png" class = "imgWidth"/>
+          <img src="resources/lib/css/img/pic.png" class = "imgWidth"/>
+          <img src="resources/lib/css/img/picture.png" class = "imgWidth"/>
+           <img src="resources/lib/css/img/images.jpg" class = "imgWidth"/>
+        </div>
+      </center>
+<div class="Container" style="width: 96.6%">
+<div class="col-sm-3"  style="margin-top:55px;margin-left:50px;">
+<form role="form" class="form-horizontal" style="width:145%">
+                        <div class="form-group">
+                            <label for="supplier" class="col-sm-3 control-label">Supplier:</label>
+                            <div class="col-sm-7" style="margin-top:15px;">
+                                <!-- <input id="supplier" type="text" ng-model="supplier" required="" class="form-control"> -->
+                                <select class="form-control" id="sel1" ng-model="supplier">
+                                  <option>supplier1@gmail.com</option>
+                                  
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="volume" class="col-sm-3 control-label">Volume:</label>
+                            <div class="col-sm-7" style="margin-top:15px;">
+                                <input id="Date" type="text" ng-model="volume" placeholder="In m&sup3;" required="" class="form-control" >
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location" class="col-sm-3 control-label">Source Location:</label>
+                            <div class="col-sm-7" style="margin-top:15px;">
+                                <!-- <input id="Date" type="text" ng-model="location" required="" class="form-control" > -->
+                                <select class="form-control" id="sel1" ng-model="location">
+                                <option selected="selected">Select</option>
+                                <option>Rotterdam, Netherlands</option>
+                                <option>Amsterdam, Netherlands</option>
+                                <option>Berlin, Germany</option>
+                                <option>Bonn, Germany</option>
+                                <option>Frankfurt, Germany</option>
+                                <option>Munich, Germany</option>
+                                <option>Stuttgart, Germany</option>
+                                <option>Copenhagen, Denmark</option>
+                                <option>Horsens, Denmark</option>
+                                <option>Kolding, Denmark</option>
+                                <option>London, United Kingdom</option>
+                                <option>Gothenburg, Sweden</option>
+                                <option>Oslo, Norway</option>
+                                <option>Vienna, Austria</option>
+                                <option>Brussels, Belgium</option>
+                                <option>Bulgaria, Sofia</option>
+                                <option>Cyprus, Nicosia</option>
+
+                              </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="loadDate" class="col-sm-3 control-label">Load Date:</label>
+                            <div class="col-sm-7" style="margin-top:15px;">
+                                <input id="loadDate" type="date" ng-model="loadDate" required="" class="form-control" >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="supplierCost" class="col-sm-3 control-label">Supplier Cost:</label>
+                            <div class="col-sm-7" style="margin-top:15px;">
+                                <input id="text" type="text" required="" placeholder="In &euro;" class="form-control" ng-model="supplierCost">
+                            </div>
+                        </div>
+</form>
+</div>
+</div>
+<div>
+<div class="col-sm-1"></div>
+<div class="col-sm-4" style="margin-top:15px;margin-right:60px;">
+   <div class="row" style="margin-top:15px;">
+      <div class="col-xs-6">
+    <form>
+    <div class="form-inline" style="margin-top:15px;">
+      <label for="transporterName">Transporter Name</label>
+      <!-- <input type="text" class="form-control" id="transporterName"  name="transporterName" ng-model = "transporterName"> -->
+      <select class="form-control" id="sel1" ng-model="transporterName">
+        <option>transporter1@gmail.com</option>
+
+      </select>
+    </div>
+      <div class="form-inline" style="margin-top:15px;">
+      <label for="text">Container Load Date:</label>
+      <input type="date" class="form-control" id="containerLoadDate" placeholder="" name="containerLoadDate" ng-model = "containerLoadDate">
+    </div>
+    <div class="form-inline" style="margin-top:15px;">
+      <label for="loadPort">Load Port:</label>
+      <input type="text" class="form-control" id="loadPort" placeholder="" name="loadPort" ng-model = "loadPort">
+    </div>
+     </form>
+    </div>
+
+<div class="col-xs-6">
+<form>
+    <div class="form-inline" style="margin-top:15px;">
+      <label for="transportationCost">Transportation Cost:</label>
+      <input type="text" class="form-control" id="transportationCost" placeholder="In &euro;" name="email" ng-model="transportationCost">
+
+    </div>
+      <div class="form-inline" style="margin-top:15px;">
+      <label for="containerDischargeDate">Container Discharge Date:</label>
+      <input type="date" class="form-control" id="containerDischargeDate" placeholder="" name="email" ng-model="containerDischargeDate">
+    </div>
+    <div class="form-inline" style="margin-top:15px;">
+      <label for="dischargePort">Discharge Port:</label>
+      <input type="text" class="form-control" id="email" placeholder="" name="email" ng-model="dischargePort">
+    </div>
+</form>
+       </div>
+  </div>
+</div>
+     <div class="col-sm-1"></div>
+       <div class="col-sm-3">
+        <form role="form" class="form-horizontal" style="margin-top:30px;">
+                        <div class="form-group">
+                            <label for="destinationLocation" class="col-sm-3 control-label">Destination Location</label>
+                            <div class="col-sm-7" style="margin-top:10px;">
+                                <!-- <input id="destinationLocation" type="text" ng-model="destinationLocation" class="form-control"> -->
+                                <select class="form-control" id="sel1" ng-model="destinationLocation">
+                                  <option selected="selected">Select</option>
+                                      <option>Rotterdam, Netherlands</option>
+                                <option>Amsterdam, Netherlands</option>
+                                <option>Berlin, Germany</option>
+                                <option>Bonn, Germany</option>
+                                <option>Frankfurt, Germany</option>
+                                <option>Munich, Germany</option>
+                                <option>Stuttgart, Germany</option>
+                                <option>Copenhagen, Denmark</option>
+                                <option>Horsens, Denmark</option>
+                                <option>Kolding, Denmark</option>
+                                <option>London, United Kingdom</option>
+                                <option>Gothenburg, Sweden</option>
+                                <option>Oslo, Norway</option>
+                                <option>Vienna, Austria</option>
+                                <option>Brussels, Belgium</option>
+                                <option>Bulgaria, Sofia</option>
+                                <option>Cyprus, Nicosia</option>
+                              </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="destinationDate" class="col-sm-3 control-label">Destination Date:</label>
+                            <div class="col-sm-7" style="margin-top:10px;">
+                                <input id="destinationDate" type="date" ng-model="destinationDate" required="" class="form-control">
+                            </div>
+                        </div>
+        </form>
+       </div>
+     </div>
+     <div  style="margin-top:40px;"><center><button type="button" class="btn btn-success btn-md" ng-click = "createProduct();">SAVE</button></center></div>
+  </div>
+</div>

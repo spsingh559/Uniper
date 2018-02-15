@@ -1,0 +1,124 @@
+<div ng-controller = "uniperController">
+  <div class="container-fluid">  
+  <div class="row" style="margin-left:200px">
+  <div class ="col-sm-3" class="pull-right">
+  <input id="supplier" type="text" ng-model="Bill.materialId" required="" placeholder="Enter Shipment ID" class="form-control"></div>
+
+  <div   ><button type="button" class="btn btn-info btn-md">Search</button></div>
+  </div>
+  </div>
+      <center>
+        <div style="width: 100%">
+          <img src="resources/lib/css/img/download.png" class = "imgWidth" />
+          <img src="resources/lib/css/img/picture.png" class = "imgWidth"/>
+          <img src="resources/lib/css/img/images.png" class = "imgWidth"/>
+          <img src="resources/lib/css/img/picture.png" class = "imgWidth"/>
+          <img src="resources/lib/css/img/pic.png" class = "imgWidth"/>
+          <img src="resources/lib/css/img/picture.png" class = "imgWidth"/>
+           <img src="resources/lib/css/img/images.jpg" class = "imgWidth"/>
+        </div>
+      </center>
+<div class="Container" style="width: 96.6%">
+<div class="col-sm-3"  style="margin-top:55px;margin-left:50px;">
+<form role="form" class="form-horizontal" style="width:145%">
+                        <div class="form-group">
+                            <label for="supplier" class="col-sm-3 control-label">Load Complete?</label>
+                            <div class="col-sm-7" style="margin-top:15px;">
+                                <select class="form-control col-sm-4" id="loadCompleteFlag" class="form-control">
+                             <option>YES</option>
+                              <option>NO</option>                         
+                            </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="supplier" class="col-sm-3 control-label">Actual Load Date:</label>
+                            <div class="col-sm-7" style="margin-top:15px;">
+                                <input id="actualLoadDate" type="date" ng-model="trackData.actualLoadDate" required="" class="form-control" >
+                            </div>
+                        </div>
+  <div class="form-group">
+                            <label for="supplier" class="col-sm-3 control-label">Supporting Docs:</label>
+                            <div class="col-sm-7" >
+                                <button type="button" class="btn btn-info btn-md">Browse</button>
+                            </div>
+                        </div>
+  
+</form>
+</div>
+</div>
+<div>
+<div class="col-sm-1"></div>
+<div class="col-sm-4" style="margin-top:15px;margin-right:60px;">
+   <div class="row" style="margin-top:15px;">
+      <div class="col-xs-6">
+         <form>
+    <div class="form-inline" style="margin-top:15px;">
+      <label for="email">Container Load to Ship Complete?</label>
+      <!-- <input type="text" class="form-control" id="email" placeholder="Y/N" ng-model="trackData.containerLoadtoShipComplete"> -->
+      <select class="form-control col-sm-4" id="containerloadCompleteFlag" style="width: 170px">
+                             <option>YES</option>
+                              <option>NO</option>                         
+                            </select>
+    </div>
+      <div class="form-inline" style="margin-top:15px;">
+      <label for="email">Container Load Date:</label>
+      <input type="date"  ng-model="trackData.containerLoadDate" class="form-control" id="email" placeholder="" >
+    </div>
+    </div>
+    </form>
+       <div class="col-xs-6">
+<form>
+    <div class="form-inline" style="margin-top:15px;">
+      <label for="email">Container Discharge Complete?</label>
+     <!--  <input type="text" class="form-control" id="email" ng-model="trackData.containerDischargeComplete" placeholder="Y/N" > -->
+      <select class="form-control col-sm-4" id="containerDischargeCompleteFlag" style="width: 170px">
+                             <option>YES</option>
+                              <option>NO</option>                         
+                            </select>
+    </div>
+      <div class="form-inline" style="margin-top:15px;">
+      <label for="email">Container Discharge Date:</label>
+      <input type="date" class="form-control" ng-model="trackData.containerDischargeDate"  id="dischargeDate" placeholder="">
+    </div>
+</form>
+       </div>
+         </div>
+          <div class="form-group" style="margin-left:50px">
+                            <label for="supplier" class="col-sm-3 control-label">Supporting Docs:</label>
+                            <div class="col-sm-7" >
+                                <button type="button" class="btn btn-info btn-md">Browse</button>
+                            </div>
+                        </div>       
+</div>
+     <div class="col-sm-1"></div>
+       <div class="col-sm-3">
+        <form role="form" class="form-horizontal" style="margin-top:30px;">
+                        <div class="form-group">
+                            <label for="supplier" class="col-sm-3 control-label">Customer Handover Complete?</label>
+                            <div class="col-sm-7" style="margin-top:10px;">
+                                <!-- <input id="Location" type="text" ng-model="trackData.customerHandoverComplete" required="" placeholder="Y/N" class="form-control" ng-disabled="true"> -->
+                                <select class="form-control col-sm-4" id="customerHandoverFlag" class="form-control" ng-disabled="true">
+                             <option>YES</option>
+                              <option>NO</option>                         
+                            </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="handoverDate" class="col-sm-3 control-label">Handover Date:</label>
+                            <div class="col-sm-7" style="margin-top:10px;">
+                                <input id="handoverDate" type="date" ng-model="trackData.handoverDate" required="" class="form-control" ng-disabled="true">
+                            </div>
+                        </div>
+ <div class="form-group">
+                            <label for="quantityReceived" class="col-sm-3 control-label">Quantity Received:</label>
+                            <div class="col-sm-7" style="margin-top:10px;">
+                                <input id="quantityReceived" type="text" ng-model="trackData.quantityReceived" required="" class="form-control" ng-disabled="true">
+                            </div>
+                        </div>
+        </form>
+       </div>
+     </div>
+     <div  style="margin-top:40px;"><center><button type="button" class="btn btn-info btn-md">SAVE</button></center></div>
+  </div>
+</div>
+
